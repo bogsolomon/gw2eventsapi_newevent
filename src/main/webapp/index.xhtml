@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>New Events Status Tracker</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+        	<p:calendar id="calendar" value="#{newEventBean.date}" pattern="MM/dd/yyyy HH:mm" navigator="true" showButtonPanel="true">
+        		<p:ajax event="dateSelect" listener="#{newEventBean.handleDateSelect}" update="eventData" />
+        	</p:calendar>
+        	<p:accordionPanel id="eventData" value="#{newEventBean.events}" var="event">
+        		<p:tab title="#{event.eventName}">
+        			 <h:panelGrid columns="2" cellpadding="10">  
+			            <h:outputText value="Event Name: " />  
+		                <h:outputText value="#{event.eventName}"/>  
+		  
+		                <h:outputText value="Event Map: " />  
+		                <h:outputText value="#{event.mapName}" style="font-weight: bold"/>  
+		  
+		                <h:outputText value="Added: " />  
+		                <h:outputText value="#{event.time}" style="font-weight: bold"/>
+			        </h:panelGrid>  
+        		</p:tab>
+        	</p:accordionPanel>
+        </h:form>
+    </h:body>
+</html>
