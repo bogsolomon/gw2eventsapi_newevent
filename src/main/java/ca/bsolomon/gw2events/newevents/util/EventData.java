@@ -6,17 +6,15 @@ public class EventData {
 
 	private final String eventId;
 	private final String eventName;
-	private final DateTime time;
 	private final String mapName;
 	
-	private int fHashCode;
+	private int fHashCode = 0;
 	
-	public EventData(String eventId, String eventName, DateTime time,
+	public EventData(String eventId, String eventName,
 			String mapName) {
 		super();
 		this.eventId = eventId;
 		this.eventName = eventName;
-		this.time = time;
 		this.mapName = mapName;
 	}
 
@@ -26,10 +24,6 @@ public class EventData {
 
 	public String getEventName() {
 		return eventName;
-	}
-
-	public DateTime getTime() {
-		return time;
 	}
 
 	public String getMapName() {

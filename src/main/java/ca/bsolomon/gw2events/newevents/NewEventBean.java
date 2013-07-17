@@ -13,6 +13,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.GJChronology;
 import org.primefaces.event.SelectEvent;
 
+import ca.bsolomon.gw2events.newevents.util.BuildVersion;
 import ca.bsolomon.gw2events.newevents.util.EventData;
 
 @ManagedBean(name="newEventBean")
@@ -36,16 +37,14 @@ public class NewEventBean {
           
     }  
     
-    public List<EventData> getEvents() {
-    	List<EventData> data = new ArrayList<>();
+    public List<BuildVersion> getEvents() {
+    	List<BuildVersion> data = new ArrayList<>();
     		
     	DateTime cutOff = new DateTime(date.getTime(), gregorianJuian); 
     	
-    	for (DateTime time:NewEventsDataRetrieveJob.eventTimes.keySet()) {
-    		if (time.isAfter(cutOff)) {
-    			List<EventData> dataToAdd = NewEventsDataRetrieveJob.eventTimes.get(time);
-    			
-    			data.addAll(dataToAdd);
+    	for (BuildVersion build:NewEventsDataRetrieveJob.buildEvents) {
+    		if (build.getBuildDate().isAfter(cutOff)) {
+    			data.add(build);
     		}
     	}
     	

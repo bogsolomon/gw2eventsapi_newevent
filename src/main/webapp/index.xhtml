@@ -9,18 +9,17 @@
         	<p:calendar id="calendar" value="#{newEventBean.date}" pattern="MM/dd/yyyy HH:mm" navigator="true" showButtonPanel="true">
         		<p:ajax event="dateSelect" listener="#{newEventBean.handleDateSelect}" update="eventData" />
         	</p:calendar>
-        	<p:accordionPanel id="eventData" value="#{newEventBean.events}" var="event">
-        		<p:tab title="#{event.eventName}">
-        			 <h:panelGrid columns="2" cellpadding="10">  
-			            <h:outputText value="Event Name: " />  
-		                <h:outputText value="#{event.eventName}"/>  
+        	<p:accordionPanel id="eventData" value="#{newEventBean.events}" var="build">
+        		<p:tab title="#{build.buildVersion} - #{build.buildTime}">
+        			 <p:dataTable var="event" value="#{build.events}">  
+			            <p:column headerText="Event Name">    
+		                	<h:outputText value="#{event.eventName}"/>
+		                </p:column>  
 		  
-		                <h:outputText value="Event Map: " />  
-		                <h:outputText value="#{event.mapName}" style="font-weight: bold"/>  
-		  
-		                <h:outputText value="Added: " />  
-		                <h:outputText value="#{event.time}" style="font-weight: bold"/>
-			        </h:panelGrid>  
+		                <p:column headerText="Map Name">  
+		                	<h:outputText value="#{event.mapName}"/>
+		                </p:column>
+			        </p:dataTable>  
         		</p:tab>
         	</p:accordionPanel>
         </h:form>

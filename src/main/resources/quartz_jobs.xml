@@ -19,7 +19,7 @@
                 <job-name>NewEventsDataRetrieveJob</job-name>
 
                 <job-group>NewEventsDataRetrieveGroup</job-group>
-                <cron-expression>0 0 * * * ?</cron-expression>
+                <cron-expression>0 0/10 * * * ?</cron-expression>
             </cron>
         </trigger>
     </schedule>
