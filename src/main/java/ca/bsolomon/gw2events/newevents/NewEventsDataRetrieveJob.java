@@ -8,11 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentLinkedDeque;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
@@ -26,6 +24,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import ca.bsolomon.gw2event.api.GW2EventsAPI;
+import ca.bsolomon.gw2event.api.dao.Names;
 import ca.bsolomon.gw2events.newevents.util.BuildVersion;
 import ca.bsolomon.gw2events.newevents.util.EventData;
 
@@ -66,17 +65,17 @@ public class NewEventsDataRetrieveJob implements Job {
 			readVersionFiles();
 		}
 
-		JSONArray result = api.queryEventIds();
+		List<Names> result = api.queryEventIds();
 		
 		DateTime time = new DateTime(gregorianJuian);
 		
 		BuildVersion version = new BuildVersion(api.queryBuildVersion(), time);
 		
 		for (int i=0;i< result.size();i++) {
-			JSONObject obj = result.getJSONObject(i);
+			Names obj = result.get(i);
 			
-			String eventId = obj.getString("id");
-			String name = obj.getString("name");
+			String eventId = obj.getId();
+			String name = obj.getName();
 			
 			if (!GW2EventsAPI.eventIdToName.containsKey(eventId)) {
 				if (!events.containsKey(eventId)) {
